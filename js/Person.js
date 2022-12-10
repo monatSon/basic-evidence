@@ -3,7 +3,9 @@
 class Person {
 
     constructor() {
-        this.personsArray = [];
+        const recordsFromStorage = localStorage.getItem("records");
+        this.records = recordsFromStorage ? JSON.parse(recordsFromStorage) : [];
+
         this.nameInput = document.getElementById("name");
         this.surnameInput = document.getElementById("surname");
         this.ageInput = document.getElementById("age");
@@ -22,22 +24,25 @@ class Person {
                 this.surnameInput.value,
                 this.ageInput.value,
                 this.phoneInput.value);
-            this.personsArray.push(personRecord);
+
+            this.records.push(personRecord);
             this.saveRecord();
+
         })
     };
 
     saveRecord() {
-        localStorage.setItem("person", JSON.stringify(this.personsArray));
+        localStorage.setItem("records", JSON.stringify(this.records));
     }
 
     readData() {
+        this.outputTable.innerHTML = "";
+
         this.readButton.addEventListener("click", () => {
-            const person = JSON.parse(localStorage.getItem("person"));
-            for (let i = 0; i < person.length; i++) {
-                this.outputTable.innerHTML +=
-                    "<tr><td>" + person[i].name + "</td><td>" + person[i].surname + "</td></tr>";
+            for (var i = 0; i < this.records.length; i++) {
+                this.outputTable.innerHTML += "<tr><td>" + this.records[i].name + "</td><td>" + this.records[i].surname + "</td><td>" + this.records[i].age + "</td><td>" + this.records[i].phone + "</td></tr>";
             }
+
         });
     }
 
