@@ -1,20 +1,18 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const app = express();
+const router = express.Router();
+const path = require('path');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// serving static js scripts
+app.use(express.static('./public'));
 
-var app = express();
+// GET home page
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/html/index.html'));
+});
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.listen(3000, () => {
+    console.log("server running on 3000")
+})
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-module.exports = app;
+console.log(__dirname);
