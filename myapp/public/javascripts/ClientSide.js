@@ -1,1 +1,1 @@
-document.write("nazdar bole")
+document.write("msg from the clienside js")

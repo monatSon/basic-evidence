@@ -19,7 +19,7 @@ app.use(express.static('./public'));
 // GET home page
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, '/public/html/index.html'));
+    res.render(path.join(__dirname, '/views/index.ejs'));
 });
 
 
