@@ -39,6 +39,35 @@
         </section>
 
         <section id="form-output">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%=peoplesList.forEach(person=> { %>
+                        <tr>
+                            <th scope="row">
+                                <%=person.name%>
+                            </th>
+                            <td>
+                                <%=person.surname%>
+                            </td>
+                            <td>
+                                <%=person.age%>
+                            </td>
+                            <td>
+                                <%=person.phone%>
+                            </td>
+                        </tr>
+                        <%= }) %>
+
+                </tbody>
+            </table>
             <table id="output-table">
 
             </table>

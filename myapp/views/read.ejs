@@ -16,41 +16,45 @@
     </head>
 
     <body>
-        <h1>ahoj
-        </h1>
+        <div class="container">
+            <h1 class="text-center mt-4">All the data from the mongodb database
+            </h1>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Surname</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Phone</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%peoplesList.forEach(person=> { %>
+            <table class="table">
+                <thead>
                     <tr>
-                        <th scope="row">
-                            <%=person.name%>
-                        </th>
-                        <td>
-                            <%=person.surname%>
-                        </td>
-                        <td>
-                            <%=person.age%>
-                        </td>
-                        <td>
-                            <%=person.phone%>
-                        </td>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Phone</th>
                     </tr>
-                    <% }) %>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
+                    <% data.forEach(person=> { %>
+                        <tr>
+                            <th scope="row">
+                                <%=person.name%>
+                            </th>
+                            <td>
+                                <%=person.surname%>
+                            </td>
+                            <td>
+                                <%=person.age%>
+                            </td>
+                            <td>
+                                <%=person.phone%>
+                            </td>
+                        </tr>
+                        <% }) %>
 
-
-        <script src="../javascripts/ClientSide.js"></script>
+                </tbody>
+            </table>
+            <button class="btn btn-dark m-2" onclick="location.href='/';" type="button" id="back-btn">Back to
+                inserting</button>
+        </div>
+    </body>
+    <script src="../javascripts/ClientSide.js"></script>
     </body>
 
 </html>

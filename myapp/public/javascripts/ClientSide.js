@@ -1,1 +1,2 @@
-document.write("msg from the clienside js")
+console.log("tady jsem si zkusil statické soubory")
+

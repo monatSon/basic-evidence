@@ -3,8 +3,11 @@ const app = express();
 const path = require('path');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
-const url = "mongodb+srv://sony-admin:admin1234@cluster0.hxwuk9f.mongodb.net/persons"
-const ejs = require("ejs")
+const url = "mongodb+srv://sony-admin:admin1234@cluster0.hxwuk9f.mongodb.net/persons";
+const ejs = require("ejs");
+const { nextTick } = require('process');
+
+app.use(express.json());
 app.use(bodyParser.json());
 
 app.set("view engine", "ejs");
@@ -39,7 +42,6 @@ const personSchema = {
 
 const Person = mongoose.model("Person", personSchema);
 
-
 // adding new person to db 
 app.post("/", (req, res) => {
     let newPerson = new Person({
@@ -54,15 +56,13 @@ app.post("/", (req, res) => {
 // 
 
 
-// rendering ejs (output in table)
-app.get("/peopleDb", (req, res) => {
-    // finding all the people in db
-    Person.find({}, (err, peoples) => {
-        res.render("read", {
-            peoplesList: peoples
-        });
+// getting data from mongo 
+app.get("/read", (req, res) => {
+    Person.find({}, (err, data) => {
+        res.render("read", { data })
     })
 });
+
 
 
 
