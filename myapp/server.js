@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
 const path = require('path');
-const mongodb = require("mongodb");
 const mongoose = require("mongoose");
-const assert = require('assert');
 const bodyParser = require('body-parser');
 const url = "mongodb+srv://sony-admin:admin1234@cluster0.hxwuk9f.mongodb.net/persons"
+const ejs = require("ejs")
+app.use(bodyParser.json());
+
+app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -16,16 +17,19 @@ mongoose.connect(url, { useNewUrlParser: true }, { useUnifiedTopology: true });
 app.use(express.static('./public'));
 
 // GET home page
+
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, '/public/html/index.html'));
 });
+
 
 app.listen(3000, () => {
     console.log("server running on 3000")
 });
 
 
-// creating schema for mongo
+// creating schema for mongo and adding to DB
+
 const personSchema = {
     name: String,
     surname: String,
@@ -35,6 +39,8 @@ const personSchema = {
 
 const Person = mongoose.model("Person", personSchema);
 
+
+// adding new person to db 
 app.post("/", (req, res) => {
     let newPerson = new Person({
         name: req.body.name,
@@ -45,3 +51,18 @@ app.post("/", (req, res) => {
     newPerson.save();
     res.redirect("/")
 })
+// 
+
+
+// rendering ejs (output in table)
+app.get("/peopleDb", (req, res) => {
+    // finding all the people in db
+    Person.find({}, (err, peoples) => {
+        res.render("read", {
+            peoplesList: peoples
+        });
+    })
+});
+
+
+
