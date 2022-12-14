@@ -6,9 +6,11 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "assert": "^2.0.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "ejs": "^3.1.8",
     "express": "~4.16.1",
     "express-handlebars": "^6.0.6",
     "http-errors": "~1.6.3",
